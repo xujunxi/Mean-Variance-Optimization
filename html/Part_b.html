@@ -1,0 +1,608 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Part_b</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-12"><meta name="DC.source" content="Part_b.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">%ETF &amp; Stock price</span>
+SPY2 = [162.316422 157.445129 164.611374 165.247635 167.130768 171.009186 173.707306 172.194305 178.989639 175.69902 180.67746 185.641068 184.153793 179.683716 189.782761 185.971954 188.639069 191.064285 186.277267 191.411682 181.100021 174.252869 190.935181 190.75235 186.34668 178.122925 177.9758 188.97287 190.696152 193.940231 193.607468 201.712112 201.95369 200.950333 198.463913 205.775024 208.716263 213.7034 222.100098 221.414474 224.585098 227.754623 228.094208 233.917709 234.60022 238.145416 244.966751 252.454422 254.216766 269.916779 260.102539 251.963898 254.280426 260.461731 260.788605 271.664337 280.335785 280.73175 262.514984 267.38443 242.425949 263.36499 271.90213 275.609772 288.13266 269.758087 287.133087 292.892029 287.988037 292.242065 300.081421 310.943817 318.412933];
+GOVT2 = [22.05658 22.367327 22.412798 22.324566 22.489336 22.666368 22.625456 22.600725 22.870443 22.71966 22.953136 23.148684 23.091032 23.820625 23.37899 23.524946 23.380312 23.310942 23.107677 23.347836 23.325846 23.536987 23.470434 23.375637 23.290922 23.845884 24.041481 24.060373 23.97644 23.97644 24.499292 24.613955 24.436232 24.435991 24.172382 23.465939 23.435972 23.560307 23.626253 23.621605 23.789616 23.931553 23.906149 23.947775 24.19735 23.983847 23.921659 23.906286 23.931028 23.683258 23.482309 23.661215 23.474279 23.654642 23.711668 23.598864 23.771526 23.552107 23.457628 23.662271 23.977739 24.304262 24.196896 24.681721 24.576677 25.171097 25.38345 25.379814 26.229044 26.014978 26.017529 25.939165 25.751354];
+EEMV2 = [49.29031 45.944656 47.592888 49.103779 49.996582 51.164082 51.567547 52.68642 54.389069 51.948036 52.608246 51.487625 49.194267 50.53072 51.809422 52.0387 54.878292 52.973476 50.865826 49.435947 45.694176 44.384544 46.629616 44.812187 43.351112 42.429657 42.456741 46.374718 46.455963 45.291405 46.573326 48.533417 48.697968 49.420166 48.295734 45.909744 46.293697 47.067871 47.977123 49.637905 50.352322 51.307964 51.400745 53.386555 54.358921 54.321518 55.340633 55.349983 56.808533 61.283325 58.184456	59.258606 58.11792 57.88028 54.981037 57.411201 56.730469 56.855114 52.713223 54.995098 53.566528 57.816887 57.203468 57.709782 58.342667 55.596901 57.310574 56.904034 55.900017 56.195316	57.445412 56.146099 57.740711];
+CME2 = [58.851837 58.218391 57.486366 57.642113 55.154507 56.416058 55.593307 58.330563 60.389565 63.079666 66.525864 67.184715 70.367737 69.569794 78.239487 77.244453 74.530106 77.227325 76.292725 79.148262 77.829643 76.428658 78.277824 80.912773 75.071144 77.189583 78.55555 82.515961 79.468826 84.639381 84.215698 88.956291 94.27243 90.940048 87.582237 98.790337 100.925209 109.421616 109.765022 107.361145 105.56633 106.565765 113.788857 112.039246 114.944832 123.972305 125.981232 128.66301 134.136871 144.979446 156.957199 152.781982 149.567902 154.519318 155.486862 151.54509 166.411957 162.107147 175.223816 181.764572 179.890335 176.649292 176.290726 159.496033 174.123138 186.990143 188.927032 189.937851 212.280609 206.467789 201.684753 198.724426 196.754135];
+BR2 = [34.852573 32.179443 33.482925 32.933151 34.184761 36.574322 37.127117 36.179119 38.123848 37.308311 39.618423 40.844959	41.64761 43.54068 48.294861	49.909832 49.176712	49.413849 45.61068 49.753517 48.396694 50.743645 54.936256 50.69479	49.54221 49.6689 52.052197 55.001179 55.787842 59.843285 60.784878 63.392807 64.910202 63.495831 60.851185 60.926468 62.394581 62.926804 65.575157 64.269905 66.471779 72.12674 71.81311 72.419014 74.586044 77.154015 82.400772 85.028549 86.869911 92.839806 96.662796 105.628044 103.588768 111.550453 111.212257 109.509224 130.988464 127.896454 113.748154 102.980301 93.622871 98.555916	98.966446 101.351418 116.009468	122.628471 125.388039 125.300369 127.587151 122.648865 123.964592 122.469727 122.30143];
+CBOE2 = [47.505466 48.019932 49.875366 52.422947 49.422054	46.939838 45.740307	45.052479 49.290966	49.950359 54.998573	55.903717 59.389023	60.372288 56.214489	53.941708 52.87059 54.984661 53.955868 58.444317 59.651302 63.253376 63.448872 68.341927 61.423496 63.257915 59.345829 62.033024 59.0476 60.658165 63.488564 65.803871 65.698669 62.251167 60.676903 66.138885 71.187592 76.708015 75.195442 78.104988 79.651115 83.478546 88.595772 91.629723 97.794594 104.609291	109.886887 112.763824 121.36425	130.910522 109.10997 111.145866 104.266708 95.263733 101.898346	95.103172 98.696579	94.24752 110.83609 105.699432 96.365334	91.873604 94.474091	94.321671 100.419388 107.268188	102.71254 108.342262 118.105057 114.235504 114.474091 118.202087 119.643654];
+ICE2 = [35.246613 33.212936 33.22089 31.469494	33.034317 31.735167	30.523302 31.605129	31.075693 32.070435	34.842316 37.803135	36.682369 34.917439	39.946377 39.591652	38.652611 40.761433	38.49424 39.874748 39.939442 41.090015 44.846207 46.168137 45.532047 47.603512 43.030838 42.43174 44.108501	49.821682 47.035851 49.35508 52.684021 50.319019 51.285305 52.539036 53.506363 55.663795 54.490627 57.104042 57.609558 57.599983 63.083408 64.038116 62.079823 65.94841	63.837116 63.817787	68.144424 71.715569	70.977455 70.433563	70.601036 69.071304	71.663071 72.24366 74.511345 73.201553 75.535172 80.123764 73.858582 75.492935 75.876488 74.883179 80.305389 81.154358 84.836464 87.011726 92.577469 91.37915 93.694695	93.545685 91.936432];
+ACN2 = [72.055008 70.004311 73.045311 69.86409	70.302269 72.238312	71.697304 70.313751	71.892418 72.123024	71.945656 77.605644	80.284477 75.538071	80.931725 84.221863	83.286934 88.219498	88.899239 94.713791	86.593636 90.258728	98.470757 99.547333	97.021957 97.987549	93.085388 107.141953 104.839424	111.528961 106.204224 105.754242 107.807266	114.528801 108.969711 113.124832 110.946266	107.858383 116.032768 113.551071 114.896118	119.121925 118.365883 123.285034 125.141655	129.26651 136.24324	143.02243 147.931244 155.284821 155.584366 148.327423 146.104935 151.819946	159.472321 155.31958 164.814407	165.915955 153.652603 161.844788 138.717056	151.053146 158.755829 173.157776 179.699646	176.625366 183.271011 191.017654 196.562302	190.78952 183.915741 200.3853 209.759064];
+
+<span class="comment">%Monthly Return</span>
+return_SPY2 = zeros(1, 72);
+return_GOVT2 = zeros(1, 72);
+return_EEMV2 = zeros(1, 72);
+return_CME2 = zeros(1, 72);
+return_BR2 = zeros(1, 72);
+return_CBOE2 = zeros(1, 72);
+return_ICE2 = zeros(1, 72);
+return_ACN2 = zeros(1, 72);
+
+<span class="keyword">for</span> j = 2:73
+    return_SPY2(j-1) = (SPY2(j) - SPY2(j-1)) / SPY2(j-1);
+    return_GOVT2(j-1) = (GOVT2(j) - GOVT2(j-1)) / GOVT2(j-1);
+    return_EEMV2(j-1) = (EEMV2(j) - EEMV2(j-1)) / EEMV2(j-1);
+    return_CME2(j-1) = (CME2(j) - CME2(j-1)) / CME2(j-1);
+    return_BR2(j-1) = (BR2(j) - BR2(j-1)) / BR2(j-1);
+    return_CBOE2(j-1) = (CBOE2(j) - CBOE2(j-1)) / CBOE2(j-1);
+    return_ICE2(j-1) = (ICE2(j) - ICE2(j-1)) / ICE2(j-1);
+    return_ACN2(j-1) = (ACN2(j) - ACN2(j-1)) / ACN2(j-1);
+<span class="keyword">end</span>
+
+<span class="comment">%Arithmetic Average of asset</span>
+arith_avg_SPY2 = mean(return_SPY2);
+arith_avg_GOVT2 = mean(return_GOVT2);
+arith_avg_EEMV2 = mean(return_EEMV2);
+arith_avg_CME2 = mean(return_CME2);
+arith_avg_BR2 = mean(return_BR2);
+arith_avg_CBOE2 = mean(return_CBOE2);
+arith_avg_ICE2 = mean(return_ICE2);
+arith_avg_ACN2 = mean(return_ACN2);
+
+<span class="comment">%Geometric Expected Return of asset</span>
+geo_return_SPY2 = geomean(return_SPY2 + 1)-1;
+geo_return_GOVT2 = geomean(return_GOVT2 + 1)-1;
+geo_return_EEMV2 = geomean(return_EEMV2 + 1)-1;
+geo_return_CME2 = geomean(return_CME2 + 1)-1;
+geo_return_BR2 = geomean(return_BR2 + 1)-1;
+geo_return_CBOE2 = geomean(return_CBOE2 + 1)-1;
+geo_return_ICE2 = geomean(return_ICE2 + 1)-1;
+geo_return_ACN2 = geomean(return_ACN2 + 1)-1;
+
+<span class="comment">%Standard Deviation of asset</span>
+std_SPY2 = std(return_SPY2);
+std_GOVT2 = std(return_GOVT2);
+std_EEMV2 = std(return_EEMV2);
+std_CME2 = std(return_CME2);
+std_BR2 = std(return_BR2);
+std_CBOE2 = std(return_CBOE2);
+std_ICE2 = std(return_ICE2);
+std_ACN2 = std(return_ACN2);
+
+<span class="comment">%Print Arithmetic Average of 3 asset</span>
+fprintf(<span class="string">'Arithmetic Average Returns of SPY: %f\n'</span>,arith_avg_SPY2);
+fprintf(<span class="string">'Arithmetic Average Returns of GOVT: %f\n'</span>,arith_avg_GOVT2);
+fprintf(<span class="string">'Arithmetic Average Returns of EEMV: %f\n'</span>,arith_avg_EEMV2);
+fprintf(<span class="string">'Arithmetic Average Returns of CME: %f\n'</span>,arith_avg_CME2);
+fprintf(<span class="string">'Arithmetic Average Returns of BR: %f\n'</span>,arith_avg_BR2);
+fprintf(<span class="string">'Arithmetic Average Returns of CBOE: %f\n'</span>,arith_avg_CBOE2);
+fprintf(<span class="string">'Arithmetic Average Returns of ICE: %f\n'</span>,arith_avg_ICE2);
+fprintf(<span class="string">'Arithmetic Average Returns of ACN: %f\n'</span>,arith_avg_ACN2);
+
+<span class="comment">%Print Expected Returns of 3 asset</span>
+fprintf(<span class="string">'Expected Returns of SPY: %f\n'</span>,geo_return_SPY2);
+fprintf(<span class="string">'Expected Returns of GOVT: %f\n'</span>,geo_return_GOVT2);
+fprintf(<span class="string">'Expected Returns of EEMV: %f\n'</span>,geo_return_EEMV2);
+fprintf(<span class="string">'Expected Returns of CME: %f\n'</span>,geo_return_CME2);
+fprintf(<span class="string">'Expected Returns of BR: %f\n'</span>,geo_return_BR2);
+fprintf(<span class="string">'Expected Returns of CBOE: %f\n'</span>,geo_return_CBOE2);
+fprintf(<span class="string">'Expected Returns of ICE: %f\n'</span>,geo_return_ICE2);
+fprintf(<span class="string">'Expected Returns of ACN: %f\n'</span>,geo_return_ACN2);
+
+<span class="comment">%Print Standard Deviation of 3 asset</span>
+fprintf(<span class="string">'Standard Deviation of SPY: %f\n'</span>,std_SPY2);
+fprintf(<span class="string">'Standard Deviation of GOVT: %f\n'</span>,std_GOVT2);
+fprintf(<span class="string">'Standard Deviation of EEMV: %f\n'</span>,std_EEMV2);
+fprintf(<span class="string">'Standard Deviation of CME: %f\n'</span>,std_CME2);
+fprintf(<span class="string">'Standard Deviation of BR: %f\n'</span>,std_BR2);
+fprintf(<span class="string">'Standard Deviation of CBOE: %f\n'</span>,std_CBOE2);
+fprintf(<span class="string">'Standard Deviation of ICE: %f\n'</span>,std_ICE2);
+fprintf(<span class="string">'Standard Deviation of ACN: %f\n'</span>,std_ACN2);
+
+<span class="comment">%Covariance Matrix</span>
+return_matrix2 = zeros(8, 72);
+return_matrix2(1,:) = return_SPY2;
+return_matrix2(2,:) = return_GOVT2;
+return_matrix2(3,:) = return_EEMV2;
+return_matrix2(4,:) = return_CME2;
+return_matrix2(5,:) = return_BR2;
+return_matrix2(6,:) = return_CBOE2;
+return_matrix2(7,:) = return_ICE2;
+return_matrix2(8,:) = return_ACN2;
+
+covariance2 = cov(return_matrix2');
+
+<span class="comment">%Print Covariance Matrix</span>
+fprintf(<span class="string">'Covariance Matrix: \n'</span>)
+disp(covariance2);
+
+<span class="comment">%Mean-Variance Optimization</span>
+c2 = [0 0 0 0 0 0 0 0]';
+A2 = -[geo_return_SPY2 geo_return_GOVT2 geo_return_EEMV2 geo_return_CME2 geo_return_BR2 geo_return_CBOE2 geo_return_ICE2 geo_return_ACN2];
+Aeq2 = [1 1 1 1 1 1 1 1];
+beq2 = [1];
+ub2 = [inf; inf; inf; inf; inf; inf; inf; inf;];
+lb2 = [-inf; -inf; -inf; -inf; -inf; -inf; -inf; -inf;]; <span class="comment">%With short selling</span>
+
+b2 = 0;
+table2 = zeros(20, 10);
+
+<span class="keyword">for</span> i = 1:20
+    b2 = b2 - 0.001;
+    [x2, fval2] = quadprog(covariance2, c2, A2, b2, Aeq2, beq2, lb2, ub2);
+    table2(i,1) = -b2;
+    table2(i,2) = fval2;
+    table2(i,3) = x2(1);
+    table2(i,4) = x2(2);
+    table2(i,5) = x2(3);
+    table2(i,6) = x2(4);
+    table2(i,7) = x2(5);
+    table2(i,8) = x2(6);
+    table2(i,9) = x2(7);
+    table2(i,10) = x2(8);
+<span class="keyword">end</span>
+
+<span class="comment">%Print Table</span>
+fprintf(<span class="string">"---------------------------------------------------Table---------------------------------------------------\n"</span>)
+fprintf(<span class="string">"Expected_R Variance SPY_Weight GOVT_Weight EEMV_Weight CME_Weight BR_Weight CBOE_Weight ICE_Weight ACN_Weight\n"</span>)
+disp(table2)
+
+<span class="comment">%Plot Efficient Frontier</span>
+<span class="comment">%plot(sqrt(table2(:,2)),table2(:,1), '-o');</span>
+<span class="comment">%title('Efficient Frontier')</span>
+<span class="comment">%xlabel('Standard Deviation &#963;')</span>
+<span class="comment">%ylabel('Expected Return R')</span>
+
+plot(sqrt(table2(:,2)),table2(:,1), <span class="string">'-*'</span>, sqrt(table(:,2)),table(:,1), <span class="string">'-o'</span>);
+legend([<span class="string">"8 assets"</span>, <span class="string">"3 assets"</span>], <span class="string">'Location'</span>, <span class="string">'southeast'</span>)
+title(<span class="string">'Efficient Frontier'</span>)
+xlabel(<span class="string">'Standard Deviation &#963;'</span>)
+ylabel(<span class="string">'Expected Return R'</span>)
+</pre><pre class="codeoutput">Arithmetic Average Returns of SPY: 0.009961
+Arithmetic Average Returns of GOVT: 0.002208
+Arithmetic Average Returns of EEMV: 0.002809
+Arithmetic Average Returns of CME: 0.017914
+Arithmetic Average Returns of BR: 0.018944
+Arithmetic Average Returns of CBOE: 0.014626
+Arithmetic Average Returns of ICE: 0.014456
+Arithmetic Average Returns of ACN: 0.016125
+Expected Returns of SPY: 0.009402
+Expected Returns of GOVT: 0.002153
+Expected Returns of EEMV: 0.002200
+Expected Returns of CME: 0.016904
+Expected Returns of BR: 0.017588
+Expected Returns of CBOE: 0.012911
+Expected Returns of ICE: 0.013405
+Expected Returns of ACN: 0.014951
+Standard Deviation of SPY: 0.033663
+Standard Deviation of GOVT: 0.010552
+Standard Deviation of EEMV: 0.035145
+Standard Deviation of CME: 0.045855
+Standard Deviation of BR: 0.052965
+Standard Deviation of CBOE: 0.058859
+Standard Deviation of ICE: 0.046625
+Standard Deviation of ACN: 0.048817
+Covariance Matrix: 
+  Columns 1 through 7
+
+    0.0011   -0.0001    0.0008    0.0002    0.0008    0.0001    0.0005
+   -0.0001    0.0001    0.0000   -0.0001    0.0001    0.0001   -0.0001
+    0.0008    0.0000    0.0012   -0.0002    0.0006   -0.0002    0.0001
+    0.0002   -0.0001   -0.0002    0.0021    0.0008    0.0011    0.0010
+    0.0008    0.0001    0.0006    0.0008    0.0028    0.0003    0.0006
+    0.0001    0.0001   -0.0002    0.0011    0.0003    0.0035    0.0007
+    0.0005   -0.0001    0.0001    0.0010    0.0006    0.0007    0.0022
+    0.0011   -0.0000    0.0005    0.0004    0.0011    0.0003    0.0008
+
+  Column 8
+
+    0.0011
+   -0.0000
+    0.0005
+    0.0004
+    0.0011
+    0.0003
+    0.0008
+    0.0024
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+
+Minimum found that satisfies the constraints.
+
+Optimization completed because the objective function is non-decreasing in 
+feasible directions, to within the value of the optimality tolerance,
+and constraints are satisfied to within the value of the constraint tolerance.
+
+---------------------------------------------------Table---------------------------------------------------
+Expected_R Variance SPY_Weight GOVT_Weight EEMV_Weight CME_Weight BR_Weight CBOE_Weight ICE_Weight ACN_Weight
+  Columns 1 through 7
+
+    0.0010    0.0000    0.2144    0.8670   -0.0512    0.0636   -0.0655
+    0.0020    0.0000    0.2144    0.8670   -0.0511    0.0636   -0.0655
+    0.0030    0.0000    0.2145    0.8668   -0.0512    0.0637   -0.0654
+    0.0040    0.0000    0.2230    0.8292   -0.0685    0.0779   -0.0491
+    0.0050    0.0000    0.2349    0.7764   -0.0928    0.0977   -0.0262
+    0.0060    0.0001    0.2469    0.7236   -0.1171    0.1176   -0.0032
+    0.0070    0.0001    0.2588    0.6709   -0.1413    0.1374    0.0197
+    0.0080    0.0001    0.2707    0.6181   -0.1656    0.1573    0.0426
+    0.0090    0.0001    0.2827    0.5653   -0.1898    0.1772    0.0656
+    0.0100    0.0002    0.2946    0.5126   -0.2141    0.1970    0.0885
+    0.0110    0.0002    0.3065    0.4598   -0.2384    0.2169    0.1114
+    0.0120    0.0003    0.3185    0.4070   -0.2626    0.2367    0.1343
+    0.0130    0.0003    0.3304    0.3543   -0.2869    0.2566    0.1573
+    0.0140    0.0004    0.3423    0.3015   -0.3111    0.2764    0.1802
+    0.0150    0.0005    0.3543    0.2487   -0.3354    0.2963    0.2031
+    0.0160    0.0005    0.3662    0.1960   -0.3597    0.3162    0.2261
+    0.0170    0.0006    0.3781    0.1432   -0.3839    0.3360    0.2490
+    0.0180    0.0007    0.3901    0.0904   -0.4082    0.3559    0.2719
+    0.0190    0.0008    0.4020    0.0377   -0.4324    0.3757    0.2948
+    0.0200    0.0009    0.4139   -0.0151   -0.4567    0.3956    0.3178
+
+  Columns 8 through 10
+
+   -0.0226    0.0210   -0.0268
+   -0.0226    0.0210   -0.0268
+   -0.0226    0.0210   -0.0267
+   -0.0174    0.0223   -0.0173
+   -0.0102    0.0242   -0.0041
+   -0.0029    0.0260    0.0091
+    0.0043    0.0279    0.0223
+    0.0116    0.0298    0.0355
+    0.0188    0.0316    0.0487
+    0.0261    0.0335    0.0619
+    0.0333    0.0354    0.0751
+    0.0406    0.0372    0.0883
+    0.0478    0.0391    0.1015
+    0.0551    0.0410    0.1147
+    0.0623    0.0428    0.1278
+    0.0696    0.0447    0.1410
+    0.0768    0.0466    0.1542
+    0.0840    0.0484    0.1674
+    0.0913    0.0503    0.1806
+    0.0985    0.0522    0.1938
+
+</pre><img vspace="5" hspace="5" src="Part_b_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%ETF & Stock price
+SPY2 = [162.316422 157.445129 164.611374 165.247635 167.130768 171.009186 173.707306 172.194305 178.989639 175.69902 180.67746 185.641068 184.153793 179.683716 189.782761 185.971954 188.639069 191.064285 186.277267 191.411682 181.100021 174.252869 190.935181 190.75235 186.34668 178.122925 177.9758 188.97287 190.696152 193.940231 193.607468 201.712112 201.95369 200.950333 198.463913 205.775024 208.716263 213.7034 222.100098 221.414474 224.585098 227.754623 228.094208 233.917709 234.60022 238.145416 244.966751 252.454422 254.216766 269.916779 260.102539 251.963898 254.280426 260.461731 260.788605 271.664337 280.335785 280.73175 262.514984 267.38443 242.425949 263.36499 271.90213 275.609772 288.13266 269.758087 287.133087 292.892029 287.988037 292.242065 300.081421 310.943817 318.412933];
+GOVT2 = [22.05658 22.367327 22.412798 22.324566 22.489336 22.666368 22.625456 22.600725 22.870443 22.71966 22.953136 23.148684 23.091032 23.820625 23.37899 23.524946 23.380312 23.310942 23.107677 23.347836 23.325846 23.536987 23.470434 23.375637 23.290922 23.845884 24.041481 24.060373 23.97644 23.97644 24.499292 24.613955 24.436232 24.435991 24.172382 23.465939 23.435972 23.560307 23.626253 23.621605 23.789616 23.931553 23.906149 23.947775 24.19735 23.983847 23.921659 23.906286 23.931028 23.683258 23.482309 23.661215 23.474279 23.654642 23.711668 23.598864 23.771526 23.552107 23.457628 23.662271 23.977739 24.304262 24.196896 24.681721 24.576677 25.171097 25.38345 25.379814 26.229044 26.014978 26.017529 25.939165 25.751354];
+EEMV2 = [49.29031 45.944656 47.592888 49.103779 49.996582 51.164082 51.567547 52.68642 54.389069 51.948036 52.608246 51.487625 49.194267 50.53072 51.809422 52.0387 54.878292 52.973476 50.865826 49.435947 45.694176 44.384544 46.629616 44.812187 43.351112 42.429657 42.456741 46.374718 46.455963 45.291405 46.573326 48.533417 48.697968 49.420166 48.295734 45.909744 46.293697 47.067871 47.977123 49.637905 50.352322 51.307964 51.400745 53.386555 54.358921 54.321518 55.340633 55.349983 56.808533 61.283325 58.184456	59.258606 58.11792 57.88028 54.981037 57.411201 56.730469 56.855114 52.713223 54.995098 53.566528 57.816887 57.203468 57.709782 58.342667 55.596901 57.310574 56.904034 55.900017 56.195316	57.445412 56.146099 57.740711];
+CME2 = [58.851837 58.218391 57.486366 57.642113 55.154507 56.416058 55.593307 58.330563 60.389565 63.079666 66.525864 67.184715 70.367737 69.569794 78.239487 77.244453 74.530106 77.227325 76.292725 79.148262 77.829643 76.428658 78.277824 80.912773 75.071144 77.189583 78.55555 82.515961 79.468826 84.639381 84.215698 88.956291 94.27243 90.940048 87.582237 98.790337 100.925209 109.421616 109.765022 107.361145 105.56633 106.565765 113.788857 112.039246 114.944832 123.972305 125.981232 128.66301 134.136871 144.979446 156.957199 152.781982 149.567902 154.519318 155.486862 151.54509 166.411957 162.107147 175.223816 181.764572 179.890335 176.649292 176.290726 159.496033 174.123138 186.990143 188.927032 189.937851 212.280609 206.467789 201.684753 198.724426 196.754135];
+BR2 = [34.852573 32.179443 33.482925 32.933151 34.184761 36.574322 37.127117 36.179119 38.123848 37.308311 39.618423 40.844959	41.64761 43.54068 48.294861	49.909832 49.176712	49.413849 45.61068 49.753517 48.396694 50.743645 54.936256 50.69479	49.54221 49.6689 52.052197 55.001179 55.787842 59.843285 60.784878 63.392807 64.910202 63.495831 60.851185 60.926468 62.394581 62.926804 65.575157 64.269905 66.471779 72.12674 71.81311 72.419014 74.586044 77.154015 82.400772 85.028549 86.869911 92.839806 96.662796 105.628044 103.588768 111.550453 111.212257 109.509224 130.988464 127.896454 113.748154 102.980301 93.622871 98.555916	98.966446 101.351418 116.009468	122.628471 125.388039 125.300369 127.587151 122.648865 123.964592 122.469727 122.30143];
+CBOE2 = [47.505466 48.019932 49.875366 52.422947 49.422054	46.939838 45.740307	45.052479 49.290966	49.950359 54.998573	55.903717 59.389023	60.372288 56.214489	53.941708 52.87059 54.984661 53.955868 58.444317 59.651302 63.253376 63.448872 68.341927 61.423496 63.257915 59.345829 62.033024 59.0476 60.658165 63.488564 65.803871 65.698669 62.251167 60.676903 66.138885 71.187592 76.708015 75.195442 78.104988 79.651115 83.478546 88.595772 91.629723 97.794594 104.609291	109.886887 112.763824 121.36425	130.910522 109.10997 111.145866 104.266708 95.263733 101.898346	95.103172 98.696579	94.24752 110.83609 105.699432 96.365334	91.873604 94.474091	94.321671 100.419388 107.268188	102.71254 108.342262 118.105057 114.235504 114.474091 118.202087 119.643654];
+ICE2 = [35.246613 33.212936 33.22089 31.469494	33.034317 31.735167	30.523302 31.605129	31.075693 32.070435	34.842316 37.803135	36.682369 34.917439	39.946377 39.591652	38.652611 40.761433	38.49424 39.874748 39.939442 41.090015 44.846207 46.168137 45.532047 47.603512 43.030838 42.43174 44.108501	49.821682 47.035851 49.35508 52.684021 50.319019 51.285305 52.539036 53.506363 55.663795 54.490627 57.104042 57.609558 57.599983 63.083408 64.038116 62.079823 65.94841	63.837116 63.817787	68.144424 71.715569	70.977455 70.433563	70.601036 69.071304	71.663071 72.24366 74.511345 73.201553 75.535172 80.123764 73.858582 75.492935 75.876488 74.883179 80.305389 81.154358 84.836464 87.011726 92.577469 91.37915 93.694695	93.545685 91.936432];
+ACN2 = [72.055008 70.004311 73.045311 69.86409	70.302269 72.238312	71.697304 70.313751	71.892418 72.123024	71.945656 77.605644	80.284477 75.538071	80.931725 84.221863	83.286934 88.219498	88.899239 94.713791	86.593636 90.258728	98.470757 99.547333	97.021957 97.987549	93.085388 107.141953 104.839424	111.528961 106.204224 105.754242 107.807266	114.528801 108.969711 113.124832 110.946266	107.858383 116.032768 113.551071 114.896118	119.121925 118.365883 123.285034 125.141655	129.26651 136.24324	143.02243 147.931244 155.284821 155.584366 148.327423 146.104935 151.819946	159.472321 155.31958 164.814407	165.915955 153.652603 161.844788 138.717056	151.053146 158.755829 173.157776 179.699646	176.625366 183.271011 191.017654 196.562302	190.78952 183.915741 200.3853 209.759064];
+
+%Monthly Return
+return_SPY2 = zeros(1, 72);
+return_GOVT2 = zeros(1, 72);
+return_EEMV2 = zeros(1, 72);
+return_CME2 = zeros(1, 72);
+return_BR2 = zeros(1, 72);
+return_CBOE2 = zeros(1, 72);
+return_ICE2 = zeros(1, 72);
+return_ACN2 = zeros(1, 72);
+
+for j = 2:73
+    return_SPY2(j-1) = (SPY2(j) - SPY2(j-1)) / SPY2(j-1);
+    return_GOVT2(j-1) = (GOVT2(j) - GOVT2(j-1)) / GOVT2(j-1);
+    return_EEMV2(j-1) = (EEMV2(j) - EEMV2(j-1)) / EEMV2(j-1);
+    return_CME2(j-1) = (CME2(j) - CME2(j-1)) / CME2(j-1);
+    return_BR2(j-1) = (BR2(j) - BR2(j-1)) / BR2(j-1);
+    return_CBOE2(j-1) = (CBOE2(j) - CBOE2(j-1)) / CBOE2(j-1);
+    return_ICE2(j-1) = (ICE2(j) - ICE2(j-1)) / ICE2(j-1);
+    return_ACN2(j-1) = (ACN2(j) - ACN2(j-1)) / ACN2(j-1); 
+end
+
+%Arithmetic Average of asset
+arith_avg_SPY2 = mean(return_SPY2);
+arith_avg_GOVT2 = mean(return_GOVT2);
+arith_avg_EEMV2 = mean(return_EEMV2);
+arith_avg_CME2 = mean(return_CME2);
+arith_avg_BR2 = mean(return_BR2);
+arith_avg_CBOE2 = mean(return_CBOE2);
+arith_avg_ICE2 = mean(return_ICE2);
+arith_avg_ACN2 = mean(return_ACN2);
+
+%Geometric Expected Return of asset
+geo_return_SPY2 = geomean(return_SPY2 + 1)-1;
+geo_return_GOVT2 = geomean(return_GOVT2 + 1)-1;
+geo_return_EEMV2 = geomean(return_EEMV2 + 1)-1;
+geo_return_CME2 = geomean(return_CME2 + 1)-1;
+geo_return_BR2 = geomean(return_BR2 + 1)-1;
+geo_return_CBOE2 = geomean(return_CBOE2 + 1)-1;
+geo_return_ICE2 = geomean(return_ICE2 + 1)-1;
+geo_return_ACN2 = geomean(return_ACN2 + 1)-1;
+
+%Standard Deviation of asset
+std_SPY2 = std(return_SPY2);
+std_GOVT2 = std(return_GOVT2);
+std_EEMV2 = std(return_EEMV2);
+std_CME2 = std(return_CME2);
+std_BR2 = std(return_BR2);
+std_CBOE2 = std(return_CBOE2);
+std_ICE2 = std(return_ICE2);
+std_ACN2 = std(return_ACN2);
+
+%Print Arithmetic Average of 3 asset
+fprintf('Arithmetic Average Returns of SPY: %f\n',arith_avg_SPY2);
+fprintf('Arithmetic Average Returns of GOVT: %f\n',arith_avg_GOVT2);
+fprintf('Arithmetic Average Returns of EEMV: %f\n',arith_avg_EEMV2);
+fprintf('Arithmetic Average Returns of CME: %f\n',arith_avg_CME2);
+fprintf('Arithmetic Average Returns of BR: %f\n',arith_avg_BR2);
+fprintf('Arithmetic Average Returns of CBOE: %f\n',arith_avg_CBOE2);
+fprintf('Arithmetic Average Returns of ICE: %f\n',arith_avg_ICE2);
+fprintf('Arithmetic Average Returns of ACN: %f\n',arith_avg_ACN2);
+
+%Print Expected Returns of 3 asset
+fprintf('Expected Returns of SPY: %f\n',geo_return_SPY2);
+fprintf('Expected Returns of GOVT: %f\n',geo_return_GOVT2);
+fprintf('Expected Returns of EEMV: %f\n',geo_return_EEMV2);
+fprintf('Expected Returns of CME: %f\n',geo_return_CME2);
+fprintf('Expected Returns of BR: %f\n',geo_return_BR2);
+fprintf('Expected Returns of CBOE: %f\n',geo_return_CBOE2);
+fprintf('Expected Returns of ICE: %f\n',geo_return_ICE2);
+fprintf('Expected Returns of ACN: %f\n',geo_return_ACN2);
+
+%Print Standard Deviation of 3 asset
+fprintf('Standard Deviation of SPY: %f\n',std_SPY2);
+fprintf('Standard Deviation of GOVT: %f\n',std_GOVT2);
+fprintf('Standard Deviation of EEMV: %f\n',std_EEMV2);
+fprintf('Standard Deviation of CME: %f\n',std_CME2);
+fprintf('Standard Deviation of BR: %f\n',std_BR2);
+fprintf('Standard Deviation of CBOE: %f\n',std_CBOE2);
+fprintf('Standard Deviation of ICE: %f\n',std_ICE2);
+fprintf('Standard Deviation of ACN: %f\n',std_ACN2);
+
+%Covariance Matrix
+return_matrix2 = zeros(8, 72);
+return_matrix2(1,:) = return_SPY2;
+return_matrix2(2,:) = return_GOVT2;
+return_matrix2(3,:) = return_EEMV2;
+return_matrix2(4,:) = return_CME2;
+return_matrix2(5,:) = return_BR2;
+return_matrix2(6,:) = return_CBOE2;
+return_matrix2(7,:) = return_ICE2;
+return_matrix2(8,:) = return_ACN2;
+
+covariance2 = cov(return_matrix2');
+
+%Print Covariance Matrix
+fprintf('Covariance Matrix: \n')
+disp(covariance2);
+
+%Mean-Variance Optimization
+c2 = [0 0 0 0 0 0 0 0]';
+A2 = -[geo_return_SPY2 geo_return_GOVT2 geo_return_EEMV2 geo_return_CME2 geo_return_BR2 geo_return_CBOE2 geo_return_ICE2 geo_return_ACN2];
+Aeq2 = [1 1 1 1 1 1 1 1];
+beq2 = [1];
+ub2 = [inf; inf; inf; inf; inf; inf; inf; inf;];
+lb2 = [-inf; -inf; -inf; -inf; -inf; -inf; -inf; -inf;]; %With short selling
+
+b2 = 0;
+table2 = zeros(20, 10);
+
+for i = 1:20
+    b2 = b2 - 0.001;
+    [x2, fval2] = quadprog(covariance2, c2, A2, b2, Aeq2, beq2, lb2, ub2);
+    table2(i,1) = -b2;
+    table2(i,2) = fval2;
+    table2(i,3) = x2(1);
+    table2(i,4) = x2(2);
+    table2(i,5) = x2(3);
+    table2(i,6) = x2(4);
+    table2(i,7) = x2(5);
+    table2(i,8) = x2(6);
+    table2(i,9) = x2(7);
+    table2(i,10) = x2(8);
+end
+
+%Print Table
+fprintf("REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-TableREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH-\n")
+fprintf("Expected_R Variance SPY_Weight GOVT_Weight EEMV_Weight CME_Weight BR_Weight CBOE_Weight ICE_Weight ACN_Weight\n")
+disp(table2)
+
+%Plot Efficient Frontier
+%plot(sqrt(table2(:,2)),table2(:,1), '-o');
+%title('Efficient Frontier')
+%xlabel('Standard Deviation σ') 
+%ylabel('Expected Return R')
+
+plot(sqrt(table2(:,2)),table2(:,1), '-*', sqrt(table(:,2)),table(:,1), '-o');
+legend(["8 assets", "3 assets"], 'Location', 'southeast')
+title('Efficient Frontier')
+xlabel('Standard Deviation σ') 
+ylabel('Expected Return R')
+##### SOURCE END #####
+--></body></html>
